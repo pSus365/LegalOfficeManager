@@ -1,0 +1,74 @@
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build results
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Ll]ogs/
+
+## .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+## Publish folder
+publish/
+out/
+wwwroot/uploads/
+
+## PDF reports, logs
+*.pdf
+*.log
+
+## Entity Framework
+Migrations/
+
+## Rider (jeśli ktoś otworzy projekt w JetBrains Rider)
+.idea/
+*.sln.iml
+
+## User secrets
+secrets.json
+
+## Docker
+**/*.db
+docker-compose.override.yml
+
+## Test results
+TestResults/
+*.coverage
+*.coveragexml
+*.trx
+
+## NLog logs
+/logs/
+
+## OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+
+## JetBrains Rider & ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+## Backup files
+*.bak
+*.old
+*.tmp
+
+## VSCode settings
+.vscode/
+
