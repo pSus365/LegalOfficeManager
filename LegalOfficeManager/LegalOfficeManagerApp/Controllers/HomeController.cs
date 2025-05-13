@@ -23,10 +23,12 @@ namespace LegalOfficeManagerApp.Controllers
             return View();
         }
 
-        public IActionResult Hi()
+        public IActionResult Hello()
         {
             return View();
         }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
