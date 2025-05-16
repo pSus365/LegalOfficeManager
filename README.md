@@ -94,8 +94,18 @@ MIT License – you are free to use and modify the code for educational and comm
 
 ---
 
-**Authors:**  
+<!-- **Authors:**  
 Piotr Sus  
-Michał Siudut
+Michał Siudut -->
+
+## Development Team
+
+Two developers. One mission: streamline legal office management.
+
+| Name   | Role               | GitHub                                           |
+|--------|--------------------|--------------------------------------------------|
+| Piotr Sus  | Full Stack Developer | [@pSus365](https://github.com/pSus365) |
+| Michał Siudut | Full Stack Developer | [@michalsiudut](https://github.com/michalsiudut) |
+
 
 2025 – For .NET & Cloud Technologies Project - Cracow University of Technology  
