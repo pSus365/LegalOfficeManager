@@ -14,6 +14,21 @@
 - Filtering and reporting on cases and clients
 - Logging and performance profiling
 
+## Core Functionality
+
+| **Module**        | **Requirements**                                                                 |
+|-------------------|----------------------------------------------------------------------------------|
+| Authentication    | Registration, login (ASP.NET Identity), roles: `Admin`, `Lawyer`, `Receptionist` |
+| Clients           | Client CRUD, search, assign cases                                                |
+| Cases             | Case CRUD, statuses, assign to lawyer, deadlines                                 |
+| Calendar          | Calendar view, appointment reminders                                             |
+| Documents         | Upload and manage documents (PDF/DOC) per case, version control                  |
+| Services          | List of law office services + pricing                                            |
+| Notes             | Internal notes for cases (with edit history)                                     |
+| Reports           | Case statistics by client / lawyer / date + export to PDF                        |
+| Settings          | Manage users, roles, law office data (`Admin` only)                              |
+
+
 ## Technologies & Architecture
 
 | Layer / Function           | Technology                                                                 |
@@ -42,13 +57,13 @@ Automated CI/CD is configured via GitHub Actions:
 
 Workflow file: `.github/workflows/dotnet-ci.yml`
 
-## Cloud Integration
+<!-- ## Cloud Integration
 
 - **Azure Blob Storage**: stores uploaded legal documents securely
 - **Azure App Service**: deploys the web application in the cloud
 - **Azure SQL Database**: stores application data
 - **Azure Key Vault (optional)**: manages connection strings and secrets
-- **Azure Monitor (optional)**: tracks performance and logs via Application Insights
+- **Azure Monitor (optional)**: tracks performance and logs via Application Insights -->
 
 ## Roles and Permissions
 
@@ -82,4 +97,5 @@ MIT License – you are free to use and modify the code for educational and comm
 **Authors:**  
 Piotr Sus  
 Michał Siudut
+
 2025 – For .NET & Cloud Technologies Project - Cracow University of Technology  
