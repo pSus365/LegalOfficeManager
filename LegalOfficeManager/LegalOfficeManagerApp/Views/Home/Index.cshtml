@@ -1,5 +1,82 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome";
 }
 
-<h1>Home</h1>
+<!-- AOS CSS for animations -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+<div class="container py-5">
+    <!-- Hero Section -->
+    <div class="row align-items-center mb-5">
+        <div class="col-md-6" data-aos="fade-right">
+            <h1 class="display-4 fw-bold text-gold-gradient">Legal Office Manager</h1>
+            <p class="lead mt-3">
+                Streamline your legal operations. Manage cases, clients, and tasks — all in one secure and intuitive platform.
+            </p>
+            <a href="/LegalOfficeEntry/Create" class="btn btn-primary btn-lg mt-3 rounded-pill">
+                <i class="bi bi-folder-plus me-1"></i> Add New Case
+            </a>
+        </div>
+        <div class="col-md-6 text-center" data-aos="fade-left">
+            <img src="https://cdn-icons-png.flaticon.com/128/3122/3122425.png" alt="Justice Icon" class="img-fluid" style="max-height: 300px;" />
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row text-center g-4 mb-5">
+        <div class="col-md-4" data-aos="zoom-in">
+            <div class="card shadow-sm border-0 h-100 p-4 rounded-4">
+                <div class="text-primary fs-1 mb-3"><i class="bi bi-journal-code"></i></div>
+                <h5 class="fw-bold">Case Management</h5>
+                <p>Organize and track case progress, deadlines, and documents with ease.</p>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="150">
+            <div class="card shadow-sm border-0 h-100 p-4 rounded-4">
+                <div class="text-dark fs-1 mb-3"><i class="bi bi-people-fill"></i></div>
+                <h5 class="fw-bold">Client Directory</h5>
+                <p>Store contact details, case history, and notes in a centralized system.</p>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="card shadow-sm border-0 h-100 p-4 rounded-4">
+                <div class="text-dark fs-1 mb-3"><i class="bi bi-shield-lock"></i></div>
+                <h5 class="fw-bold">Data Security</h5>
+                <p>We ensure encrypted, secure storage of all your legal and personal data.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="bg-gradient p-5 text-white rounded-4 text-center shadow-lg" data-aos="fade-up">
+        <h2 class="fw-bold">Start managing your office smarter</h2>
+        <p class="mb-4">Join legal professionals improving efficiency and client care with our platform.</p>
+        <a href="/LegalOfficeEntry" class="btn btn-dark btn-lg rounded-pill px-4">
+            <i class="bi bi-arrow-right"></i> View All Cases
+        </a>
+    </div>
+</div>
+
+<!-- AOS JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({ once: true });
+</script>
+
+<style>
+    .bg-gradient {
+        background: linear-gradient(135deg, #3f51b5, #2196f3);
+    }
+
+    .text-gold-gradient {
+        background: -webkit-linear-gradient(45deg, #a68c1d, #e6c200);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    }
+
+    body.dark-mode .card {
+        background-color: #1e1e2f;
+        color: #ccc;
+    }
+</style>
