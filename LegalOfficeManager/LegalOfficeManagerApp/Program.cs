@@ -1,3 +1,6 @@
+using LegalOfficeManagerApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace LegalOfficeManagerApp
 {
     public class Program
@@ -8,6 +11,12 @@ namespace LegalOfficeManagerApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //Added service for Database connection context
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
             var app = builder.Build();
 
