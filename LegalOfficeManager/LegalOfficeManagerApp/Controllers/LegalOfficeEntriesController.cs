@@ -7,7 +7,7 @@ namespace LegalOfficeManagerApp.Controllers
     public class LegalOfficeEntriesController : Controller
     {
         private readonly ApplicationDbContext _db; 
-        public LegalOfficeEntriesController(ApplicationDbContext db)
+        public LegalOfficeEntriesController(ApplicationDbContext db)  // dependency injection of the database context!
         {
             _db = db;
         }
