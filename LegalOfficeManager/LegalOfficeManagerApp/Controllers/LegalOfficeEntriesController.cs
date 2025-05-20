@@ -18,5 +18,28 @@ namespace LegalOfficeManagerApp.Controllers
             return View(objLegalOfficeEntryList);
 
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(LegalOfficeEntry obj)
+        {
+            //server side data validation
+            if(obj != null && obj.Name.Length < 3)
+            {
+                ModelState.AddModelError("Name", "Name must be at least 3 characters long.");
+            }
+
+            if (ModelState.IsValid) // saving data only when the model state is valid (everything went good)
+            {
+                _db.LegalOfficeEntries.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            
+            return View(obj);
+        }
     }
 }
