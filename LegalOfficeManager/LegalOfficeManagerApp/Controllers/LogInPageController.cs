@@ -7,9 +7,9 @@ namespace LegalOfficeManagerApp.Controllers
 {
     public class LogInPageController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public LogInPageController(SignInManager<IdentityUser> signInManager)
+        public LogInPageController(SignInManager<ApplicationUser> signInManager)
         {
             _signInManager = signInManager;
         }
@@ -21,8 +21,11 @@ namespace LegalOfficeManagerApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(UserLoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
+            if (!ModelState.IsValid)
+                return View(model);
+
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
             if (result.Succeeded)
             {
