@@ -30,7 +30,7 @@ namespace LegalOfficeManagerApp.Controllers
             }
 
             ModelState.AddModelError("", "Nieprawidłowy login lub hasło");
-            return View();
+            return View(model);
         }
     }
 }
