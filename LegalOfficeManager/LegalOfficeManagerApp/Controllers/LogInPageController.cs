@@ -1,10 +1,19 @@
 ﻿using LegalOfficeManagerApp.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace LegalOfficeManagerApp.Controllers
 {
     public class LogInPageController : Controller
     {
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        public LogInPageController(SignInManager<IdentityUser> signInManager)
+        {
+            _signInManager = signInManager;
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -12,20 +21,16 @@ namespace LegalOfficeManagerApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(UserModel model)
+        public async Task<IActionResult> Login(UserLoginViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            if (model.Email == "admin@admin.com" && model.PasswordHash == "admin")
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Home");
             }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Nieprawidłowy login lub hasło");
-                return View(model);
-            }
+
+            ModelState.AddModelError("", "Nieprawidłowy login lub hasło");
+            return View();
         }
     }
 }
