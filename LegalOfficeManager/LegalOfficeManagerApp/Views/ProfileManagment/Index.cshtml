@@ -3,6 +3,7 @@
     ViewData["Title"] = "My Profile";
 }
 
+
 <div class="container py-5">
     <h2 class="mb-4">My Profile</h2>
 
@@ -21,7 +22,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Account Details</h5>
-                    <form method="post">
+                    <form asp-controller="ProfileManagment" asp-action="SaveChanges" method="post">
                         <div class="mb-3">
                             <label asp-for="@Model.FirstName" class="form-label">First Name</label>
                             <input asp-for="@Model.FirstName" class="form-control" />
@@ -54,3 +55,23 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (TempData["ProfileUpdated"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!!',
+                        text: '@TempData["ProfileUpdated"]',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#007bff', 
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false
+                    });
+            </text>
+        }
+    </script>
+}
