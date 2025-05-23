@@ -57,7 +57,7 @@ namespace LegalOfficeManagerApp
                 pattern: "{controller=LogInPage}/{action=Login}/{id?}")
                 .WithStaticAssets();
 
-            /* Dodawanie u¿ytkownika i roli jednorazowo
+            // Dodawanie u¿ytkownika i roli jednorazowo
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -113,7 +113,6 @@ namespace LegalOfficeManagerApp
                     }
                 }
             }
-            */
             app.Run();
         }
     }
