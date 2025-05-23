@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LegalOfficeManagerApp.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>  // 01:46:42
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>  // 01:46:42
     {
         //constructor 
 
