@@ -1,0 +1,81 @@
+﻿@model RegisterViewModel
+
+@{
+    ViewData["HideNavbar"] = "true";
+    ViewData["Title"] = "Create New Account";
+}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card shadow rounded-4 border-0">
+                <div class="card-header bg-primary text-white rounded-top-4">
+                    <h2 class="mb-0 text-center fw-semibold">
+                        <i class="bi bi-journal-plus me-2"></i>Create New User
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <form asp-action="Create" method="post">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="FirstName" class="form-label fw-semibold text-center w-100">First Name</label>
+                                <input asp-for="FirstName" class="form-control" placeholder="Enter first Name" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="LastName" class="form-label fw-semibold text-center w-100">Last Name</label>
+                                <input asp-for="LastName" class="form-control" placeholder="Enter last name" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Email" class="form-label fw-semibold text-center w-100">Email</label>
+                                <input asp-for="Email" type="email" class="form-control" placeholder="Enter email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PhoneNumber" class="form-label fw-semibold text-center w-100">Phone</label>
+                                <input asp-for="PhoneNumber" class="form-control" placeholder="Enter phone number" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Gender" class="form-label fw-semibold text-center w-100">Gender</label>
+                                <input asp-for="Gender" class="form-control" placeholder="Gender" />
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Password" class="form-label fw-semibold text-center w-100">Password</label>
+                                <input asp-for="Password" class="form-control" type="password" placeholder="Enter password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-center w-100">Role</label>
+                                <select asp-for="SelectedRole" class="form-select" asp-items="@(new SelectList(Model.Roles))">
+                                    <option value="">-- Select Role --</option>
+                                </select>
+                                <span asp-validation-for="SelectedRole" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="CreatedAt" class="form-label fw-semibold text-center w-100">Created At</label>
+                                <input asp-for="CreatedAt" class="form-control" type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-success px-4 py-2 rounded-pill shadow">
+                                <i class="bi bi-bookmarks me-2"></i>Create
+                            </button>
+
+                            <a asp-controller="LogInPage" asp-action="Login" class="btn btn-danger px-4 py-2 rounded-pill shadow">
+                                Cancel
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
