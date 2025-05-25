@@ -3,6 +3,7 @@ using LegalOfficeManagerApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace LegalOfficeManagerApp.Controllers
 {
@@ -10,10 +11,13 @@ namespace LegalOfficeManagerApp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public ProfileManagmentController(ApplicationDbContext context, UserManager<ApplicationUser> userManager) {
+        public ProfileManagmentController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        {
             _context = context;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<IActionResult> Index()
@@ -28,8 +32,14 @@ namespace LegalOfficeManagerApp.Controllers
             return View(userData); // przekaż model do widoku
         }
         [HttpPost]
-        public async Task<IActionResult> SaveChanges(ApplicationUser model)
+        public async Task<IActionResult> SaveChanges(ApplicationUser model, string action)
         {
+
+            if (action == "logout")
+            {
+                await _signInManager.SignOutAsync();
+                return RedirectToAction("Login", "LogInPage");
+            }
             if (!ModelState.IsValid)
                 return View("Index", model);
 
@@ -59,6 +69,5 @@ namespace LegalOfficeManagerApp.Controllers
 
            //return View("Index", model);
         }
-
     }
 }

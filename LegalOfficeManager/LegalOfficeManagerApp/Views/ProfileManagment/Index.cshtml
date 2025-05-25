@@ -3,7 +3,6 @@
     ViewData["Title"] = "My Profile";
 }
 
-
 <div class="container py-5">
     <h2 class="mb-4">My Profile</h2>
 
@@ -22,21 +21,23 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Account Details</h5>
-                    <form asp-controller="ProfileManagment" asp-action="SaveChanges" method="post">
+
+                    <!-- Formularz edycji profilu -->
+                    <form id="profileForm" asp-controller="ProfileManagment" asp-action="SaveChanges" method="post">
                         <div class="mb-3">
                             <label asp-for="@Model.FirstName" class="form-label">First Name</label>
                             <input asp-for="@Model.FirstName" class="form-control" />
-                            <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                            <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
                             <label asp-for="@Model.LastName" class="form-label">Last Name</label>
                             <input asp-for="@Model.LastName" class="form-control" />
-                            <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                            <span asp-validation-for="@Model.LastName" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
                             <label asp-for="@Model.Gender" class="form-label">Gender</label>
                             <input asp-for="@Model.Gender" class="form-control" />
-                            <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                            <span asp-validation-for="@Model.Gender" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
                             <label asp-for="@Model.Email" class="form-label">Email</label>
@@ -48,13 +49,29 @@
                             <input asp-for="@Model.PhoneNumber" class="form-control" />
                             <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
                         </div>
-                        <button type="submit" class="btn btn-success">Save Changes</button>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <button type="submit" class="btn btn-success">
+                                Save Changes
+                            </button>
+
+                            <!-- Przycisk wylogowania jako osobny formularz -->
+                            <button type="button" onclick="logout()" class="btn btn-danger">
+                                Log Out
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Ukryty formularz do wylogowania -->
+                    <form id="logoutForm" asp-controller="LogInPage" asp-action="LogOut" method="post" style="display: none;">
+                        @Html.AntiForgeryToken()
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -66,12 +83,16 @@
                         title: 'Success!!',
                         text: '@TempData["ProfileUpdated"]',
                         confirmButtonText: 'OK',
-                        confirmButtonColor: '#007bff', 
+                        confirmButtonColor: '#007bff',
                         allowOutsideClick: false,
                         allowEscapeKey: false,
                         allowEnterKey: false
                     });
             </text>
+        }
+
+        function logout() {
+            document.getElementById('logoutForm').submit();
         }
     </script>
 }
