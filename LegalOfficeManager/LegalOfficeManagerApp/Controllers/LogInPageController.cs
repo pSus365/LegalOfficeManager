@@ -27,20 +27,42 @@ namespace LegalOfficeManagerApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
         {
             if (!ModelState.IsValid)
+            {
                 return View(model);
+            }
 
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Niepoprawny Email lub hasło!!");
+                return View(model);
+            }
+
+            // Spróbuj zalogować
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, lockoutOnFailure: false);
+
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Home");
             }
-
-            ModelState.AddModelError("", "Nieprawidłowy login lub hasło");
-            return View(model);
+            else if (result.RequiresTwoFactor)
+            {
+                // Zapisz tymczasowo Email do TempData do użycia przy 2FA
+                TempData["EmailFor2FA"] = model.Email;
+                return RedirectToAction("LoginWith2fa", "TwoFactorAuth");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Niepoprawny Email lub hasło!!");
+                return View(model);
+            }
         }
+
+
         [HttpGet]
         public async Task<IActionResult> Register()
         {
@@ -77,13 +99,16 @@ namespace LegalOfficeManagerApp.Controllers
                 PhoneNumber = model.PhoneNumber,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Gender = model.Gender
+                Gender = model.Gender,
+                EmailConfirmed = true
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
+                await _userManager.SetTwoFactorEnabledAsync(user, true);
+
                 if (!string.IsNullOrEmpty(model.SelectedRole))
                 {
                     await _userManager.AddToRoleAsync(user, model.SelectedRole);

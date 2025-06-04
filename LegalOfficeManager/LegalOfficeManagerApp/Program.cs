@@ -1,6 +1,7 @@
 ﻿using LegalOfficeManagerApp.Data;
 using LegalOfficeManagerApp.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace LegalOfficeManagerApp
@@ -13,6 +14,11 @@ namespace LegalOfficeManagerApp
 
             // Dodanie usług do kontenera
             builder.Services.AddControllersWithViews();
+     
+            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+
 
             // Dodanie DbContext z połączeniem do bazy
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -29,6 +35,12 @@ namespace LegalOfficeManagerApp
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
+
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Tokens.ProviderMap["Email"] = new TokenProviderDescriptor(typeof(EmailTokenProvider<ApplicationUser>));
+            });
+
 
             // Konfiguracja cookie
             builder.Services.ConfigureApplicationCookie(options =>
