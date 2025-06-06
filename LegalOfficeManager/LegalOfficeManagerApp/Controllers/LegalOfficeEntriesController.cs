@@ -26,13 +26,12 @@ namespace LegalOfficeManagerApp.Controllers
         [HttpPost]
         public IActionResult Create(LegalOfficeEntry obj)
         {
-            //server side data validation
             if(obj != null && obj.Name.Length < 3)
             {
                 ModelState.AddModelError("Name", "Name must be at least 3 characters long.");
             }
 
-            if (ModelState.IsValid) // saving data only when the model state is valid (everything went good)
+            if (ModelState.IsValid) 
             {
                 _db.LegalOfficeEntries.Add(obj);
                 _db.SaveChanges();
@@ -63,13 +62,12 @@ namespace LegalOfficeManagerApp.Controllers
         [HttpPost]
         public IActionResult Edit(LegalOfficeEntry obj)
         {
-            //server side data validation
             if (obj != null && obj.Name.Length < 3)
             {
                 ModelState.AddModelError("Name", "Name must be at least 3 characters long.");
             }
 
-            if (ModelState.IsValid) // saving data only when the model state is valid (everything went good)
+            if (ModelState.IsValid) 
             {
                 _db.LegalOfficeEntries.Update(obj);
                 _db.SaveChanges();
@@ -108,5 +106,41 @@ namespace LegalOfficeManagerApp.Controllers
         public IActionResult PriceListView() {
             return View();
         }
+
+        public IActionResult ChoosePackage(string package)
+        {
+            if (string.IsNullOrEmpty(package))
+            {
+                return RedirectToAction("PriceListView");
+            }
+
+            return RedirectToAction("FakePayment", new { package = package });
+        }
+
+        [HttpGet]
+        public IActionResult FakePayment(string package)
+        {
+            if (string.IsNullOrEmpty(package))
+                return RedirectToAction("PriceListView");
+
+            var model = new PaymentViewModel { Package = package };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult FakePayment(PaymentViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                
+                return View(model);
+            }
+            ViewData["ShowThankYouModal"] = true;
+
+            return View(model);
+        }
+
+
+
     }
 }

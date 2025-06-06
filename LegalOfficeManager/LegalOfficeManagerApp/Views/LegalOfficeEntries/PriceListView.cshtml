@@ -3,7 +3,6 @@
     ViewData["Title"] = "Legal Services Pricing";
 }
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
 <div class="container py-5">
     <h1 class="text-center mb-4">Legal Services Pricing</h1>
@@ -26,7 +25,7 @@
                         <li>❌ No priority response</li>
                         <li>❌ No court representation</li>
                     </ul>
-                    <a href="#" class="btn btn-outline-primary">Choose Package</a>
+                    <a asp-controller="LegalOfficeEntries" asp-action="ChoosePackage" asp-route-package="Basic" class="btn btn-outline-primary">Choose Package</a>
                 </div>
             </div>
         </div>
@@ -44,7 +43,7 @@
                         <li>✅ Contract review (up to 3 per month)</li>
                         <li>❌ Court representation in only 1 case</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">Choose Package</a>
+                    <a asp-controller="LegalOfficeEntries" asp-action="ChoosePackage" asp-route-package="Business" class="btn btn-outline-primary">Choose Package</a>
                 </div>
             </div>
         </div>
@@ -62,7 +61,7 @@
                         <li>✅ Court representation in any case</li>
                         <li>✅ 24/7 support + document access online</li>
                     </ul>
-                    <a href="#" class="btn btn-success">Choose Premium</a>
+                    <a asp-controller="LegalOfficeEntries" asp-action="ChoosePackage" asp-route-package="Premium" class="btn btn-outline-primary">Choose Package</a>
                 </div>
             </div>
         </div>
