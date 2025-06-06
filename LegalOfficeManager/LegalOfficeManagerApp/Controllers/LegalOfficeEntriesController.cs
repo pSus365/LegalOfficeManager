@@ -104,5 +104,9 @@ namespace LegalOfficeManagerApp.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult PriceListView() {
+            return View();
+        }
     }
 }
