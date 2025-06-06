@@ -1,15 +1,18 @@
 ﻿using LegalOfficeManagerApp.Data;
 using LegalOfficeManagerApp.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LegalOfficeManagerApp.Controllers
 {
     public class LegalOfficeEntriesController : Controller
     {
-        private readonly ApplicationDbContext _db; 
-        public LegalOfficeEntriesController(ApplicationDbContext db)  // dependency injection of the database context!
+        private readonly ApplicationDbContext _db;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public LegalOfficeEntriesController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)  // dependency injection of the database context!
         {
             _db = db;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -128,18 +131,26 @@ namespace LegalOfficeManagerApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult FakePayment(PaymentViewModel model)
+        public async Task<IActionResult> FakePayment(PaymentViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                
                 return View(model);
             }
-            ViewData["ShowThankYouModal"] = true;
 
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            user.ActivePackage = model.Package;
+            _db.Update(user);
+            await _db.SaveChangesAsync();
+
+            ViewData["ShowThankYouModal"] = true;
             return View(model);
         }
-
 
 
     }

@@ -53,6 +53,11 @@
                             <input asp-for="@Model.PhoneNumber" class="form-control" />
                             <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
                         </div>
+                        <div class="mb-3">
+                            <label asp-for="@Model.ActivePackage" class="form-label">Active Package</label>
+                            <input asp-for="@Model.ActivePackage" class="form-control" readonly />
+                            <span asp-validation-for="@Model.ActivePackage" class="text-danger"></span>
+                        </div>
 
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <button type="submit" class="btn btn-success">

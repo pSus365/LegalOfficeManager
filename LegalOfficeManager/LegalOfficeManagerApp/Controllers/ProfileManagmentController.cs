@@ -52,6 +52,7 @@ namespace LegalOfficeManagerApp.Controllers
             user.Email = model.Email;
             user.PhoneNumber = model.PhoneNumber;
             user.Gender = model.Gender;
+            user.ActivePackage = model.ActivePackage;
 
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
