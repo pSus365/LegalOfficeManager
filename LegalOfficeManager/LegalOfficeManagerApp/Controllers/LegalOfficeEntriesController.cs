@@ -15,12 +15,29 @@ namespace LegalOfficeManagerApp.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string? nameFilter, string? surnameFilter, string? caseTypeFilter)
         {
-            List<LegalOfficeEntry> objLegalOfficeEntryList = _db.LegalOfficeEntries.ToList();
-            return View(objLegalOfficeEntryList);
+            var query = _db.LegalOfficeEntries.AsQueryable();
 
+            if (!string.IsNullOrEmpty(nameFilter))
+            {
+                query = query.Where(e => e.Name.Contains(nameFilter));
+            }
+
+            if (!string.IsNullOrEmpty(surnameFilter))
+            {
+                query = query.Where(e => e.Surname.Contains(surnameFilter));
+            }
+
+            if (!string.IsNullOrEmpty(caseTypeFilter))
+            {
+                query = query.Where(e => e.CaseType.Contains(caseTypeFilter));
+            }
+
+            var filteredList = query.ToList();
+            return View(filteredList);
         }
+
         public IActionResult Create()
         {
             return View();
