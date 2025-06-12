@@ -1,4 +1,5 @@
-﻿using LegalOfficeManagerApp.Models;
+﻿using LegalOfficeManagerApp.Mappers;
+using LegalOfficeManagerApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -10,14 +11,18 @@ namespace LegalOfficeManagerApp.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserMapper _userMapper;
+
 
         public LogInPageController(SignInManager<ApplicationUser> signInManager,
                                    UserManager<ApplicationUser> userManager,
-                                   RoleManager<IdentityRole> roleManager)
+                                   RoleManager<IdentityRole> roleManager,
+                                   UserMapper userMapper)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _roleManager = roleManager;
+            _userMapper = userMapper;
         }
 
         [HttpGet]
@@ -92,17 +97,12 @@ namespace LegalOfficeManagerApp.Controllers
                 return View("Register", model);
             }
 
-            var user = new ApplicationUser
-            {
-                UserName = model.Email,
-                Email = model.Email,
-                PhoneNumber = model.PhoneNumber,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Gender = model.Gender,
-                EmailConfirmed = model.EnableTwoFactor,
-                ActivePackage = "Casual"
-            };
+            var user = _userMapper.ToEntity(model); // mapperly z registerviewmodel do applicationuser;
+
+
+            user.UserName = model.Email;
+            user.ActivePackage = "Casual";  // hardkodujemy basic package - pozniej mozna kupic lepszy
+
 
             var result = await _userManager.CreateAsync(user, model.Password);
 

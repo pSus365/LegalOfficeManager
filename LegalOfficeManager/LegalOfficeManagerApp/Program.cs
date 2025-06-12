@@ -1,4 +1,5 @@
 ﻿using LegalOfficeManagerApp.Data;
+using LegalOfficeManagerApp.Mappers;
 using LegalOfficeManagerApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -17,6 +18,7 @@ namespace LegalOfficeManagerApp
      
             builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
             builder.Services.AddTransient<IEmailSender, EmailSender>();
+            builder.Services.AddSingleton<UserMapper>();
 
 
 
