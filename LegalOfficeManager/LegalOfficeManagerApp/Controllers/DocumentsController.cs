@@ -21,6 +21,8 @@ namespace LegalOfficeManagerApp.Controllers
             ViewBag.LegalOfficeEntryId = legalOfficeEntryId;
             return View();
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Upload(int legalOfficeEntryId, IFormFile file)
         {
@@ -65,6 +67,17 @@ namespace LegalOfficeManagerApp.Controllers
             ViewBag.LegalOfficeEntryId = legalOfficeEntryId;
             return View();
         }
+
+        public async Task<IActionResult> List(int legalOfficeEntryId)
+        {
+            var documents = await _db.Documents
+                .Where(d => d.LegalOfficeEntryId == legalOfficeEntryId)
+                .ToListAsync();
+
+            ViewBag.LegalOfficeEntryId = legalOfficeEntryId;
+            return View(documents);
+        }
+
     }
 
 }
