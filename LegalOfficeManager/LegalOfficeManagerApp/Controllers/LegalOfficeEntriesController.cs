@@ -170,5 +170,35 @@ namespace LegalOfficeManagerApp.Controllers
         }
 
 
+        public IActionResult MyCases(string? nameFilter, string? surnameFilter, string? caseTypeFilter)
+        {
+            string currentUserEmail = User.Identity.Name;
+
+            var query = _db.LegalOfficeEntries.AsQueryable();
+
+            query = query.Where(e => e.Email == currentUserEmail);
+
+            if (!string.IsNullOrEmpty(nameFilter))
+            {
+                query = query.Where(e => e.Name.Contains(nameFilter));
+            }
+
+            if (!string.IsNullOrEmpty(surnameFilter))
+            {
+                query = query.Where(e => e.Surname.Contains(surnameFilter));
+            }
+
+            if (!string.IsNullOrEmpty(caseTypeFilter))
+            {
+                query = query.Where(e => e.CaseType.Contains(caseTypeFilter));
+            }
+
+            var filteredList = query.ToList();
+            return View("Index", filteredList);
+        }
+
+
+
+
     }
 }
