@@ -74,8 +74,10 @@ namespace LegalOfficeManagerApp.Controllers
                 .ToListAsync();
 
             ViewBag.LegalOfficeEntryId = legalOfficeEntryId;
+            ViewBag.BaseUrl = $"{Request.Scheme}://{Request.Host}";
             return View(documents);
         }
+
 
 
         public async Task<IActionResult> Download(Guid id)
@@ -94,6 +96,26 @@ namespace LegalOfficeManagerApp.Controllers
             var contentType = GetContentType(document.FileName);
             return File(fileBytes, contentType, document.FileName);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var document = await _db.Documents.FindAsync(id);
+            if (document == null)
+                return NotFound();
+
+            var filePath = Path.Combine(_env.WebRootPath, document.FilePath.TrimStart('/', '\\'));
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+
+            _db.Documents.Remove(document);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("List", new { legalOfficeEntryId = document.LegalOfficeEntryId });
+        }
+
 
 
         private string GetContentType(string fileName)
