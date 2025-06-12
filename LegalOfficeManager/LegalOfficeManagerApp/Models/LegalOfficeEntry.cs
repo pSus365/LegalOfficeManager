@@ -1,4 +1,6 @@
-﻿namespace LegalOfficeManagerApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LegalOfficeManagerApp.Models
 {
     public class LegalOfficeEntry
     {
@@ -20,7 +22,8 @@
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
         public ICollection<Document> Documents { get; set; } = new List<Document>();
-
+        [Display(Name = "Enable Two-Factor Authentication")]
+        public bool EnableTwoFactor { get; set; }
 
     }
 }

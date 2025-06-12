@@ -100,7 +100,8 @@ namespace LegalOfficeManagerApp.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Gender = model.Gender,
-                EmailConfirmed = true
+                EmailConfirmed = model.EnableTwoFactor,
+                ActivePackage = "Casual"
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
