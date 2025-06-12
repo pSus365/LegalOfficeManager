@@ -76,6 +76,13 @@
                                 <label asp-for="UpdatedAt" class="form-label fw-semibold text-center w-100">Updated At</label>
                                 <input asp-for="UpdatedAt" class="form-control" type="datetime-local" value="" />
                             </div>
+                            <div>
+                                <form asp-action="UploadDocument" asp-controller="Documents" enctype="multipart/form-data" method="post">
+                                    <input type="hidden" name="LegalOfficeEntryId" value="@Model.Id" />
+                                    <input type="file" name="file" class="form-control" required />
+                                    <button type="submit" class="btn btn-success mt-2">Upload Document</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="text-center mt-4">
                             <button type="submit" class="btn btn-dark px-4 py-2 rounded-pill shadow">

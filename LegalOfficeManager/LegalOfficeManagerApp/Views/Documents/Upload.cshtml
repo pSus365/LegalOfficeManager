@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Upload Document";
+}
+<h2>Upload Document</h2>
+
+<form asp-action="Upload" asp-controller="Documents" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="legalOfficeEntryId" value="@ViewBag.LegalOfficeEntryId" />
+
+    <div class="mb-3">
+        <label for="file" class="form-label">Select file to upload:</label>
+        <input type="file" name="file" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-success">Upload</button>
+</form>

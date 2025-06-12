@@ -8,6 +8,8 @@ namespace LegalOfficeManagerApp.Data
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>  // 01:46:42
     {
         //constructor 
+        public DbSet<Document> Documents { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

@@ -16,7 +16,6 @@
         </div>
     </div>
 
-    <!-- FILTRY POD PRZYCISKIEM -->
     <form method="get" asp-controller="LegalOfficeEntries" asp-action="Index">
         <div class="row mb-4 mt-2">
             <div class="col-md-3">
@@ -63,7 +62,8 @@
                     <td>@entry.Notes</td>
                     <td>
                         <a asp-controller="LegalOfficeEntries" asp-action="Edit" asp-route-id="@entry.Id">Edit</a> |
-                        <a asp-controller="LegalOfficeEntries" asp-action="Delete" asp-route-id="@entry.Id">Delete</a>
+                        <a asp-controller="LegalOfficeEntries" asp-action="Delete" asp-route-id="@entry.Id">Delete</a> |
+                        <a asp-controller="Documents" asp-action="Upload" asp-route-legalOfficeEntryId="@entry.Id">Upload Document</a>
                     </td>
                 </tr>
             }
