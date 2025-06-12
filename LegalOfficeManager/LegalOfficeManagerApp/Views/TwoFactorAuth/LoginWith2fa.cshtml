@@ -3,12 +3,27 @@
     ViewData["HideNavbar"] = "true";
 }
 
-<h2>Weryfikacja dwuetapowa</h2>
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+        <h3 class="text-center mb-3">🔐 Weryfikacja dwuetapowa</h3>
+        <p class="text-muted text-center mb-4">Wpisz kod weryfikacyjny wysłany na Twój e-mail:</p>
 
-<form asp-action="VerifyCode" method="post">
-    <div class="form-group">
-        <label for="code">Wpisz kod weryfikacyjny wysłany na email:</label>
-        <input type="text" name="code" class="form-control" required />
+        <form asp-action="VerifyCode" method="post">
+            <div class="mb-3">
+                <label for="code" class="form-label">Kod weryfikacyjny</label>
+                <input type="text" id="code" name="code" class="form-control" required autofocus />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Zweryfikuj</button>
+        </form>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger mt-3">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p class="mb-0">@error.ErrorMessage</p>
+                }
+            </div>
+        }
     </div>
-    <button type="submit" class="btn btn-primary">Zweryfikuj</button>
-</form>
+</div>
