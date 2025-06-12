@@ -41,10 +41,7 @@
                                 <a class="btn btn-sm btn-outline-primary rounded-pill" href="@Url.Content(doc.FilePath)" target="_blank">
                                     <i class="bi bi-eye"></i> View
                                 </a>
-                                <a class="btn btn-sm btn-outline-secondary rounded-pill" asp-action="Download" asp-route-id="@doc.Id">
-                                    <i class="bi bi-download"></i> Download
-                                </a>
-                                
+                                <a class="btn btn-sm btn-primary" asp-action="Download" asp-route-id="@doc.Id">Download</a>
                             </td>
                         </tr>
                     }

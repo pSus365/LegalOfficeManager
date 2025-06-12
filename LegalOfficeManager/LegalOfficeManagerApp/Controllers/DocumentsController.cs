@@ -55,9 +55,8 @@ namespace LegalOfficeManagerApp.Controllers
                 catch (DbUpdateException ex)
                 {
                     var inner = ex.InnerException?.Message;
-                    // Wyświetl to w logu, konsoli, lub ViewBag / TempData
                     Console.WriteLine("Inner Exception: " + inner);
-                    throw; // lub zwróć widok z błędem
+                    throw; 
                 }
 
 
@@ -77,6 +76,47 @@ namespace LegalOfficeManagerApp.Controllers
             ViewBag.LegalOfficeEntryId = legalOfficeEntryId;
             return View(documents);
         }
+
+
+        public async Task<IActionResult> Download(Guid id)
+        {
+            var document = await _db.Documents.FindAsync(id);
+            if (document == null)
+                return NotFound();
+
+            var relativePath = document.FilePath.TrimStart('/', '\\');
+            var filePath = Path.Combine(_env.WebRootPath, relativePath);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound();
+
+            var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            var contentType = GetContentType(document.FileName);
+            return File(fileBytes, contentType, document.FileName);
+        }
+
+
+        private string GetContentType(string fileName)
+        {
+            var types = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        {".pdf", "application/pdf"},
+        {".docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"},
+        {".doc", "application/msword"},
+        {".xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"},
+        {".xls", "application/vnd.ms-excel"},
+        {".png", "image/png"},
+        {".jpg", "image/jpeg"},
+        {".jpeg", "image/jpeg"},
+        {".txt", "text/plain"},
+    };
+
+            var ext = Path.GetExtension(fileName);
+            return types.TryGetValue(ext, out var contentType) ? contentType : "application/octet-stream";
+        }
+
+
+
 
     }
 
