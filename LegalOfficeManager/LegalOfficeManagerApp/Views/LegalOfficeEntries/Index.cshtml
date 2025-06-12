@@ -48,6 +48,7 @@
                 <th>CaseType</th>
                 <th>Status</th>
                 <th>Notes</th>
+                <th>Documents</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -60,6 +61,21 @@
                     <td>@entry.CaseType</td>
                     <td>@entry.Status</td>
                     <td>@entry.Notes</td>
+                    <td>
+                        @if (entry.Documents != null && entry.Documents.Any())
+                        {
+                            <a class="btn btn-outline-primary btn-sm"
+                               asp-controller="Documents"
+                               asp-action="Index"
+                               asp-route-legalOfficeEntryId="@entry.Id">
+                                Show docs
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="text-muted"> No documents</span>
+                        }
+                    </td>
                     <td>
                         <a asp-controller="LegalOfficeEntries" asp-action="Edit" asp-route-id="@entry.Id">Edit</a> |
                         <a asp-controller="LegalOfficeEntries" asp-action="Delete" asp-route-id="@entry.Id">Delete</a> |

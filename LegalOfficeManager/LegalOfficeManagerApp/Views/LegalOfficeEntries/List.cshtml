@@ -1,0 +1,32 @@
+﻿@model List<Document>
+
+<h3>Dokumenty dla sprawy ID: @ViewBag.LegalOfficeEntryId</h3>
+
+@if (!Model.Any())
+{
+    <p>Brak dokumentów dla tej sprawy.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Upload Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var doc in Model)
+            {
+                <tr>
+                    <td>@doc.FileName</td>
+                    <td>@doc.UploadDate.ToShortDateString()</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="@doc.FilePath" target="_blank">View</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

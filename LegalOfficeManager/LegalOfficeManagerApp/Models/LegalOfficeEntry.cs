@@ -19,6 +19,8 @@
         public string Status { get; set; } = string.Empty; // TODO: add a list of statuses in the database and connect it with this field OR ENUM?
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public ICollection<Document> Documents { get; set; } = new List<Document>();
+
 
     }
 }

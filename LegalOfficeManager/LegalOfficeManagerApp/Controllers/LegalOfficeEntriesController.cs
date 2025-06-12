@@ -2,6 +2,7 @@
 using LegalOfficeManagerApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LegalOfficeManagerApp.Controllers
 {
@@ -17,7 +18,9 @@ namespace LegalOfficeManagerApp.Controllers
 
         public IActionResult Index(string? nameFilter, string? surnameFilter, string? caseTypeFilter)
         {
-            var query = _db.LegalOfficeEntries.AsQueryable();
+            var query = _db.LegalOfficeEntries
+               .Include(e => e.Documents)
+               .AsQueryable();
 
             if (!string.IsNullOrEmpty(nameFilter))
             {
@@ -36,6 +39,17 @@ namespace LegalOfficeManagerApp.Controllers
 
             var filteredList = query.ToList();
             return View(filteredList);
+        }
+
+        public IActionResult List(int legalOfficeEntryId)
+        {
+            var documents = _db.Documents
+                               .Where(d => d.LegalOfficeEntryId == legalOfficeEntryId)
+                               .ToList();
+
+            ViewBag.LegalOfficeEntryId = legalOfficeEntryId;
+
+            return View(documents);
         }
 
         public IActionResult Create()
@@ -174,7 +188,10 @@ namespace LegalOfficeManagerApp.Controllers
         {
             string currentUserEmail = User.Identity.Name;
 
-            var query = _db.LegalOfficeEntries.AsQueryable();
+
+            var query = _db.LegalOfficeEntries
+              .Include(e => e.Documents)
+              .AsQueryable();
 
             query = query.Where(e => e.Email == currentUserEmail);
 
