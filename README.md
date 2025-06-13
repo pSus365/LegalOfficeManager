@@ -46,15 +46,6 @@
 | API Documentation         | Swagger / Swashbuckle                                                      |
 | Performance Testing       | NBomber load testing                                                        |
 
-## CI/CD – GitHub Actions
-
-Automated CI/CD is configured via GitHub Actions:
-
-- Build: `dotnet build`
-- Tests: `dotnet test`
-- Optional Docker build and publish
-- Deployment to Azure (with secrets)
-
 Workflow file: `.github/workflows/dotnet-ci.yml`
 
 ## Roles and Permissions
@@ -64,13 +55,6 @@ Workflow file: `.github/workflows/dotnet-ci.yml`
 | Admin      | Full access to manage all users, cases, and system settings            |
 | Lawyer     | Manages assigned cases, adds comments, uploads documents               |
 | Secretary  | Registers clients, schedules meetings, creates new cases               |
-
-## Testing & Profiling
-
-- **Unit tests**: written using xUnit
-- **Load testing**: NBomber simulation on `/api/cases/active`
-- **Query analysis**: SQL Server Profiler and EF Core logging
-- **Index optimization**: added non-clustered indexes where needed
 
 ## Setup Instructions
 
