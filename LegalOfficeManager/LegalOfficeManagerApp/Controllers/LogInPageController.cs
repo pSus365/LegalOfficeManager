@@ -98,7 +98,21 @@ namespace LegalOfficeManagerApp.Controllers
             }
 
             var user = _userMapper.ToEntity(model); // mapperly z registerviewmodel do applicationuser;
-
+            /*
+             * 
+             * var user = new ApplicationUser
+                   {
+                 UserName = model.Email,
+                 Email = model.Email,
+                 PhoneNumber = model.PhoneNumber,
+                 FirstName = model.FirstName,
+                 LastName = model.LastName,
+                Gender = model.Gender,
+                 EmailConfirmed = model.EnableTwoFactor,
+                 ActivePackage = "Casual"
+                };
+             * 
+             */
 
             user.UserName = model.Email;
             user.ActivePackage = "Casual";  // hardkodujemy basic package - pozniej mozna kupic lepszy

@@ -1,5 +1,10 @@
 ﻿@model List<LegalOfficeEntry>
 
+@{
+    ViewBag.Title = "Cases";
+    var currentView = ViewBag.CurrentView ?? "Index";
+}
+
 <div class="container">
     <div class="row pt-4">
         <div class="col-6">
@@ -16,7 +21,9 @@
         </div>
     </div>
 
-    <form method="get" asp-controller="LegalOfficeEntries" asp-action="Index">
+    <form method="post" asp-controller="LegalOfficeEntries" asp-action="@currentView">
+        <input type="hidden" name="viewType" value="@currentView" />
+
         <div class="row mb-4 mt-2">
             <div class="col-md-3">
                 <input type="text" name="nameFilter" class="form-control" placeholder="Filter by Name"
@@ -32,8 +39,7 @@
             </div>
             <div class="col-md-3 d-flex gap-2">
                 <button type="submit" class="btn btn-primary w-50 rounded-3">Filter</button>
-                <a href="@Url.Action("Index", "LegalOfficeEntries")" class="btn btn-danger w-50 rounded-3">Reset</a>
-
+                <button type="submit" name="reset" value="true" class="btn btn-danger w-50 rounded-3">Reset</button>
             </div>
         </div>
     </form>

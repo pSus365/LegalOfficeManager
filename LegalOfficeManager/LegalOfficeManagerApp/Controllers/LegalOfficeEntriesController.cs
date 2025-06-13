@@ -16,8 +16,15 @@ namespace LegalOfficeManagerApp.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index(string? nameFilter, string? surnameFilter, string? caseTypeFilter)
+        public IActionResult Index(string? nameFilter, string? surnameFilter, string? caseTypeFilter, string? viewType, string? reset)
         {
+            ViewBag.CurrentView = "Index";
+
+            if (!string.IsNullOrEmpty(reset))
+            {
+                return RedirectToAction("Index");
+            }
+
             var query = _db.LegalOfficeEntries
                .Include(e => e.Documents)
                .AsQueryable();
@@ -41,6 +48,7 @@ namespace LegalOfficeManagerApp.Controllers
             return View(filteredList);
         }
 
+
         public IActionResult List(int legalOfficeEntryId)
         {
             var documents = _db.Documents
@@ -54,7 +62,7 @@ namespace LegalOfficeManagerApp.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            return View(new LegalOfficeEntry());
         }
 
         [HttpPost]
@@ -184,16 +192,21 @@ namespace LegalOfficeManagerApp.Controllers
         }
 
 
-        public IActionResult MyCases(string? nameFilter, string? surnameFilter, string? caseTypeFilter)
+        public IActionResult MyCases(string? nameFilter, string? surnameFilter, string? caseTypeFilter, string? viewType, string? reset)
         {
+            ViewBag.CurrentView = "MyCases";
+
+            if (!string.IsNullOrEmpty(reset))
+            {
+                return RedirectToAction("MyCases");
+            }
+
             string currentUserEmail = User.Identity.Name;
 
-
             var query = _db.LegalOfficeEntries
-              .Include(e => e.Documents)
-              .AsQueryable();
-
-            query = query.Where(e => e.Email == currentUserEmail);
+                .Include(e => e.Documents)
+                .Where(e => e.Email == currentUserEmail)
+                .AsQueryable();
 
             if (!string.IsNullOrEmpty(nameFilter))
             {

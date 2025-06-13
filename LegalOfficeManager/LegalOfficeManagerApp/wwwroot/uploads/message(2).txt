@@ -1,4 +1,4 @@
-﻿@model LegalOfficeEntry
+@model LegalOfficeEntry
 
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
@@ -11,8 +11,7 @@
                 </div>
                 <div class="card-body p-4">
                     <div asp-validation-summary="All" class="text-danger"></div>
-
-                    <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <form asp-action="Create" method="post">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label asp-for="Name" class="form-label fw-semibold text-center w-100">Name</label>
@@ -74,10 +73,23 @@
                             </div>
                             <div class="col-md-6">
                                 <label asp-for="UpdatedAt" class="form-label fw-semibold text-center w-100">Updated At</label>
-                                <input asp-for="UpdatedAt" class="form-control" type="datetime-local" />
-                            </div>  
-                        </div>
+                                <input asp-for="UpdatedAt" class="form-control" type="datetime-local" value="" />
+                            </div>
 
+                            <!-- Upload Document Section -->
+                            <div class="col-12">
+                                <form asp-action="UploadDocument" asp-controller="Documents" enctype="multipart/form-data" method="post">
+                                    <input type="hidden" name="LegalOfficeEntryId" value="@Model.Id" />
+                                    <div class="mb-2">
+                                        <input type="file" name="file" class="form-control" required />
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-success mt-2">Upload Document</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
                         <div class="text-center mt-4">
                             <button type="submit" class="btn btn-dark px-4 py-2 rounded-pill shadow">
                                 <i class="bi bi-bookmarks me-2"></i>Save Entry
