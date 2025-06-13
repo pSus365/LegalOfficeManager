@@ -1,6 +1,6 @@
 # LegalOfficeManager
 
-**LegalOfficeManager** is a modern web application designed to manage the daily operations of a legal office. Built with **ASP.NET Core 8** and integrated with **Microsoft Azure**, it provides secure and scalable functionality for client, case, and document management. The system automates legal workflows, reporting, and notification processes using modern .NET and cloud technologies.
+**LegalOfficeManager** is a modern web application designed to manage the daily operations of a legal office. Built with **ASP.NET Core 9** and integrated with **Microsoft Azure**, it provides secure and scalable functionality for client, case, and document management. The system automates legal workflows, reporting, and notification processes using modern .NET and cloud technologies.
 
 ## Features
 
@@ -33,8 +33,8 @@
 
 | Layer / Function           | Technology                                                                 |
 |---------------------------|----------------------------------------------------------------------------|
-| Backend                   | ASP.NET Core 8 Web API + Razor Pages                                       |
-| ORM & DB                  | Entity Framework Core 8 + SQL Server (local or Azure SQL)                  |
+| Backend                   | ASP.NET Core 9 Web API + Razor Pages                                       |
+| ORM & DB                  | Entity Framework Core 9 + SQL Server (local or Azure SQL)                  |
 | Authentication            | ASP.NET Identity + Role-based Authorization                                |
 | Mapping                   | [Mapperly](https://github.com/mapperly/mapperly)                           |
 | Logging                   | NLog (file-based) + Azure Application Insights (optional)                  |
@@ -56,14 +56,6 @@ Automated CI/CD is configured via GitHub Actions:
 - Deployment to Azure (with secrets)
 
 Workflow file: `.github/workflows/dotnet-ci.yml`
-
-<!-- ## Cloud Integration
-
-- **Azure Blob Storage**: stores uploaded legal documents securely
-- **Azure App Service**: deploys the web application in the cloud
-- **Azure SQL Database**: stores application data
-- **Azure Key Vault (optional)**: manages connection strings and secrets
-- **Azure Monitor (optional)**: tracks performance and logs via Application Insights -->
 
 ## Roles and Permissions
 
@@ -93,10 +85,6 @@ Workflow file: `.github/workflows/dotnet-ci.yml`
 MIT License – you are free to use and modify the code for educational and commercial purposes.
 
 ---
-
-<!-- **Authors:**  
-Piotr Sus  
-Michał Siudut -->
 
 ## Development Team
 
