@@ -9,10 +9,9 @@
 - Internal comment threads for case history
 - Document uploads and PDF generation
 - Automated email notifications (e.g., new case updates)
-- Daily background reports sent via email
+- Background reports sent via email
 - Role-based authentication (Admin, Lawyer, Secretary)
 - Filtering and reporting on cases and clients
-- Logging and performance profiling
 
 ## Core Functionality
 
@@ -37,14 +36,8 @@
 | ORM & DB                  | Entity Framework Core 9 + SQL Server (local or Azure SQL)                  |
 | Authentication            | ASP.NET Identity + Role-based Authorization                                |
 | Mapping                   | [Mapperly](https://github.com/mapperly/mapperly)                           |
-| Logging                   | NLog (file-based) + Azure Application Insights (optional)                  |
-| CI/CD                     | GitHub Actions + optional Docker image build and push                      |
-| Cloud Hosting             | Azure App Service / Azure Container Apps                                   |
-| File Storage              | Azure Blob Storage (for documents and uploads)                             |
 | Background Processing     | .NET `BackgroundService` for automated PDF generation and email delivery   |
 | Email Delivery            | SMTP or Azure Communication Services                                       |
-| API Documentation         | Swagger / Swashbuckle                                                      |
-| Performance Testing       | NBomber load testing                                                        |
 
 Workflow file: `.github/workflows/dotnet-ci.yml`
 
@@ -80,4 +73,4 @@ Two developers. One mission: streamline legal office management.
 | Michał Siudut | Full Stack Developer | [@michalsiudut](https://github.com/michalsiudut) |
 
 
-2025 – For .NET & Cloud Technologies Project - Cracow University of Technology  
+Cracow 2025 – For .NET & Cloud Technologies Project - Cracow University of Technology  
