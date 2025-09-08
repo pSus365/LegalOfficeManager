@@ -1,0 +1,125 @@
+﻿@model PaymentViewModel
+
+<style>
+    .payment-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+        background: #f8f9fa;
+        border-radius: 2rem;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .modal-content {
+        border-radius: 2rem;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        animation: slideUp 0.5s ease-in-out;
+    }
+
+    .modal-body {
+        font-size: 1.1rem;
+    }
+
+    @@keyframes slideUp {
+        from
+
+    {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    }
+
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    }
+
+    .btn-success {
+        border-radius: 999px;
+        padding: 0.5rem 2rem;
+        font-weight: 500;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .btn-success:hover {
+            transform: scale(1.05);
+        }
+
+    .modal-dialog-centered {
+        align-items: flex-start !important;
+        margin-top: 10vh;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="payment-container">
+        <h2 class="text-center mb-4">Payment for <strong>@Model.Package</strong> Package</h2>
+
+        <form method="post" asp-action="FakePayment" asp-controller="LegalOfficeEntries" id="paymentForm">
+            <input type="hidden" asp-for="Package" />
+
+            <div class="mb-3">
+                <label asp-for="Code" class="form-label">Code BLIK</label>
+                <input asp-for="Code" maxlength="6" class="form-control rounded-pill px-4 py-2" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Confirm Payment</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="thankYouModal" tabindex="-1" aria-labelledby="thankYouModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="thankYouModalLabel">🎉 Thank You!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Your payment for the <strong>@Model.Package</strong> package was successful.</p>
+                <p class="text-muted">We appreciate your purchase.</p>
+            </div>
+            <div class="modal-footer justify-content-center border-0">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-primary rounded-pill px-4">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        const showModal = @((ViewData["ShowThankYouModal"] != null && (bool)ViewData["ShowThankYouModal"]).ToString().ToLower());
+
+        if(showModal) {
+            const thankYouModal = new bootstrap.Modal(document.getElementById('thankYouModal'));
+            thankYouModal.show();
+
+            document.getElementById('paymentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+            });
+        }
+    </script>
+}

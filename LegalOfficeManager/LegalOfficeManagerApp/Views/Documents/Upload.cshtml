@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Upload Document";
+}
+
+<div class="container mt-5" style="max-width: 400px;">
+    <div class="card shadow-sm rounded-4 border-0">
+        <div class="card-body p-3">
+            <h2 class="card-title text-center mb-3 text-primary fw-bold" style="font-size: 1.8rem;">
+                <i class="bi bi-cloud-upload-fill me-2"></i> Upload Document
+            </h2>
+
+            <form asp-action="Upload" asp-controller="Documents" method="post" enctype="multipart/form-data" id="uploadForm">
+                <input type="hidden" name="legalOfficeEntryId" value="@ViewBag.LegalOfficeEntryId" />
+
+                <div class="mb-3">
+                    <label for="file" class="form-label fw-semibold" style="font-size: 0.95rem;">Select file to upload</label>
+                    <input type="file" name="file" id="file" class="form-control form-control-md" accept=".pdf,.doc,.docx,.txt,.png,.jpg" required />
+                    <div class="form-text" style="font-size: 0.85rem;">Supported: PDF, DOC, DOCX, TXT, PNG, JPG</div>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 btn-md rounded-pill d-flex justify-content-center align-items-center gap-2" id="uploadBtn" style="font-size: 1rem; padding: 0.45rem 0;">
+                    <i class="bi bi-upload"></i> Upload
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const form = document.getElementById('uploadForm');
+        const btn = document.getElementById('uploadBtn');
+
+        form.addEventListener('submit', () => {
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Uploading...`;
+        });
+    </script>
+}

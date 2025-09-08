@@ -1,0 +1,95 @@
+﻿@model LegalOfficeEntry
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card shadow rounded-4 border-0">
+                <div class="card-header bg-primary text-white rounded-top-4">
+                    <h2 class="mb-0 text-center fw-semibold">
+                        <i class="bi bi-journal-plus me-2"></i>Delete Existing Client
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <form asp-action="Delete" method="post">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="Name" class="form-label fw-semibold text-center w-100">Name</label>
+                                <input asp-for="Name" class="form-control" placeholder="Enter name" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Surname" class="form-label fw-semibold text-center w-100">Surname</label>
+                                <input asp-for="Surname" class="form-control" placeholder="Enter surname" />
+                                <span asp-validation-for="Surname" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Email" class="form-label fw-semibold text-center w-100">Email</label>
+                                <input asp-for="Email" type="email" class="form-control" placeholder="Enter email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Phone" class="form-label fw-semibold text-center w-100">Phone</label>
+                                <input asp-for="Phone" class="form-control" placeholder="Enter phone number" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Address" class="form-label fw-semibold text-center w-100">Address</label>
+                                <input asp-for="Address" class="form-control" placeholder="Street address" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="City" class="form-label fw-semibold text-center w-100">City</label>
+                                <input asp-for="City" class="form-control" placeholder="City name" />
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PostalCode" class="form-label fw-semibold text-center w-100">Postal Code</label>
+                                <input asp-for="PostalCode" class="form-control" placeholder="e.g. 00-000" />
+                                <span asp-validation-for="PostalCode" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Country" class="form-label fw-semibold text-center w-100">Country</label>
+                                <input asp-for="Country" class="form-control" placeholder="Country name" />
+                                <span asp-validation-for="Country" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="CaseType" class="form-label fw-semibold text-center w-100">Case Type</label>
+                                <input asp-for="CaseType" class="form-control" placeholder="e.g. Family Law" />
+                                <span asp-validation-for="CaseType" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Status" class="form-label fw-semibold text-center w-100">Status</label>
+                                <input asp-for="Status" class="form-control" placeholder="e.g. Open, Closed" />
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="Notes" class="form-label fw-semibold text-center w-100">Notes</label>
+                                <textarea asp-for="Notes" class="form-control" rows="4" placeholder="Additional information or notes..."></textarea>
+                            </div>
+                            <br>
+                            <div class="col-md-6">
+                                <label asp-for="CreatedAt" class="form-label fw-semibold text-center w-100">Created At</label>
+                                <input asp-for="CreatedAt" class="form-control" type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="UpdatedAt" class="form-label fw-semibold text-center w-100">Updated At</label>
+                                <input asp-for="UpdatedAt" class="form-control" type="datetime-local" value="" />
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-danger px-4 py-2 rounded-pill shadow">
+                                <i class="bi bi-bookmarks me-2"></i>Delete
+                            </button>
+                            <a asp-controller="LegalOfficeEntries" asp-action="Index" class="btn btn-primary px-4 py-2 rounded-pill shadow">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

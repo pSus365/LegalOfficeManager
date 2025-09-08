@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "Legal Services Pricing";
+}
+
+
+<div class="container py-5">
+    <h1 class="text-center mb-4">Legal Services Pricing</h1>
+    <p class="text-center text-muted mb-5">
+        Choose a package tailored to your legal needs. We offer professional legal advice and comprehensive representation.
+    </p>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        <!-- Basic Package -->
+        <div class="col">
+            <div class="card h-100 border-light shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Basic Package</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">199 PLN / month</h6>
+                    <ul class="list-unstyled mt-3 mb-4 text-start">
+                        <li>✅ 2 hours of legal consultation</li>
+                        <li>✅ 1 assigned attorney</li>
+                        <li>✅ Civil law support</li>
+                        <li>❌ No priority response</li>
+                        <li>❌ No court representation</li>
+                    </ul>
+                    <a asp-controller="LegalOfficeEntries" asp-action="ChoosePackage" asp-route-package="Basic" class="btn btn-outline-primary">Choose Package</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Package -->
+        <div class="col">
+            <div class="card h-100 border-primary shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Business Package</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">499 PLN / month</h6>
+                    <ul class="list-unstyled mt-3 mb-4 text-start">
+                        <li>✅ 6 hours of consultation</li>
+                        <li>✅ 2 assigned legal professionals</li>
+                        <li>✅ Civil, family, and criminal law</li>
+                        <li>✅ Contract review (up to 3 per month)</li>
+                        <li>❌ Court representation in only 1 case</li>
+                    </ul>
+                    <a asp-controller="LegalOfficeEntries" asp-action="ChoosePackage" asp-route-package="Business" class="btn btn-outline-primary">Choose Package</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Package -->
+        <div class="col">
+            <div class="card h-100 border-success shadow-lg">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-success">Premium Package</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">999 PLN / month</h6>
+                    <ul class="list-unstyled mt-3 mb-4 text-start">
+                        <li>✅ Unlimited legal consultations</li>
+                        <li>✅ Team of 3 attorneys + legal advisor</li>
+                        <li>✅ Full support for individuals & businesses</li>
+                        <li>✅ Court representation in any case</li>
+                        <li>✅ 24/7 support + document access online</li>
+                    </ul>
+                    <a asp-controller="LegalOfficeEntries" asp-action="ChoosePackage" asp-route-package="Premium" class="btn btn-outline-primary">Choose Package</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿@model List<Document>
+
+@{
+    ViewData["Title"] = "Documents List";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">
+            <i class="bi bi-file-earmark-pdf-fill text-danger"></i> Documents for this case
+        </h2>
+        <a asp-action="Upload" asp-route-legalOfficeEntryId="@ViewBag.LegalOfficeEntryId" class="btn btn-success rounded-pill shadow-sm">
+            <i class="bi bi-cloud-upload"></i> Upload New Document
+        </a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info shadow-sm rounded-3">
+            <i class="bi bi-info-circle"></i> No documents available for this case.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive shadow-sm rounded-3">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>📄 File Name</th>
+                        <th>📅 Upload Date</th>
+                        <th>⚙️ Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var doc in Model)
+                    {
+                        <tr>
+                            <td>@doc.FileName</td>
+                            <td>@doc.UploadDate.ToString("g")</td>
+                            <td>
+                                @{
+                                    var extension = System.IO.Path.GetExtension(doc.FileName).ToLower();
+                                    var baseUrl = Context.Request.Scheme + "://" + Context.Request.Host;
+                                    var fullUrl = $"{baseUrl}{doc.FilePath}";
+                                }
+
+                                @if (extension == ".pdf")
+                                {
+                                    <a class="btn btn-sm btn-outline-primary rounded-pill me-1" href="@fullUrl" target="_blank">
+                                        <i class="bi bi-eye"></i> View
+                                    </a>
+                                }
+
+                                <a class="btn btn-sm btn-primary rounded-pill me-1" asp-action="Download" asp-route-id="@doc.Id">
+                                    <i class="bi bi-download"></i> Download
+                                </a>
+
+                                <form asp-action="Delete" asp-route-id="@doc.Id" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this document?');">
+                                    <button type="submit" class="btn btn-sm btn-danger rounded-pill">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

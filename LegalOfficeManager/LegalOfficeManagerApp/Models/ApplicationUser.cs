@@ -1,0 +1,15 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.ComponentModel.DataAnnotations;
+
+namespace LegalOfficeManagerApp.Models
+{
+    public class ApplicationUser : IdentityUser
+    {
+        public string FirstName { get; set; } 
+        public string LastName { get; set; }   
+        public string Gender { get; set; }
+        public string ActivePackage { get; set; } = "Casual";
+
+    }
+}
